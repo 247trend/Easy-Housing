@@ -20,6 +20,7 @@ const Profile = () => {
 
   const onLogout = () => {
     auth.signOut()
+    toast.info("Logged out")
     navigate("/")
   }
 
