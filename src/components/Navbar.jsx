@@ -8,7 +8,7 @@ const Navbar = () => {
   const location = useLocation()
 
   const whichPath = (route) => {
-    if (route === location.pathname) return true
+    return route === location.pathname
   }
 
   return (
@@ -16,16 +16,16 @@ const Navbar = () => {
       <nav className="navbarNav">
         <ul className="navbarListItems">
           <li onClick={() => navigate("/")} className="navbarListItem">
-            <ExploreIcon fill={whichPath("/") ? "#2c2c2c" : "#8f8f8f"} width="36px" height="36px" />
+            <ExploreIcon fill={whichPath("/") ? "#89ABE3ff " : "#8f8f8f"} width="36px" height="36px" />
             <p className={whichPath("/") ? "navbarListItemNameActive" : "navbarListItemName"}>Explore</p>
           </li>
           <li onClick={() => navigate("/offers")} className="navbarListItem">
-            <OfferIcon fill={whichPath("/offers") ? "#2c2c2c" : "#8f8f8f"} width="36px" height="36px" />
+            <OfferIcon fill={whichPath("/offers") ? "#89ABE3ff " : "#8f8f8f"} width="36px" height="36px" />
             <p className={whichPath("/offers") ? "navbarListItemNameActive" : "navbarListItemName"}>Offers</p>
           </li>
           <li onClick={() => navigate("/profile")} className="navbarListItem">
-            <PersonOutlineIcon fill={whichPath("/profile") ? "#2c2c2c" : "#8f8f8f"} width="36px" height="36px" />
-            <p className={whichPath("profile") ? "navbarListItemNameActive" : "navbarListItemName"}>Profile</p>
+            <PersonOutlineIcon fill={whichPath("/profile") ? "#89ABE3ff " : "#8f8f8f"} width="36px" height="36px" />
+            <p className={whichPath("/profile") ? "navbarListItemNameActive" : "navbarListItemName"}>Profile</p>
           </li>
         </ul>
       </nav>
