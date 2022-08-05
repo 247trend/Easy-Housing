@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg"
 import visibilityIcon from "../assets/svg/visibilityIcon.svg"
+import OAuth from "../components/OAuth"
 
 const SignIn = () => {
   const [showPass, setShowPass] = useState(false)
@@ -32,7 +33,7 @@ const SignIn = () => {
       if (userCredential.user) {
         navigate("/")
       }
-      toast.success("Successfully log in")
+      toast.success("Successfully logged in")
     } catch (error) {
       toast.error("Wrong user credential")
     }
@@ -64,9 +65,13 @@ const SignIn = () => {
             </div>
           </form>
 
+          
+          <OAuth />
+          
           <Link to="/sign-up" className="registerLink">
             Sign Up Instead
           </Link>
+          
         </main>
       </div>
     </>

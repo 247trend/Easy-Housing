@@ -76,6 +76,7 @@ const Profile = () => {
           <div className="profileCard">
             <form>
               <input type="text" id="name" className={!changeDetails ? "profileName" : "profileNameActive"} disabled={!changeDetails} value={name} onChange={onChange} />
+              <input type="email" id="email" className="profileName" disabled={!changeDetails} value={email} />
             </form>
           </div>
         </main>
