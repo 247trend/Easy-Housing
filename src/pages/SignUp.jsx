@@ -29,7 +29,7 @@ const SignUp = () => {
         </header>
         <main>
           <form>
-            <input type="text" className="nameInput" placeholder="Name" id="email" value={name} onChange={onChange} />
+            <input type="text" className="nameInput" placeholder="Name" id="name" value={name} onChange={onChange} />
             <input type="email" className="emailInput" placeholder="Email" id="email" value={email} onChange={onChange} />
             <div className="passwordInputDiv">
               <input type={showPass ? "text" : "password"} className="passwordInput" placeholder="Password" id="password" value={password} onChange={onChange} />
