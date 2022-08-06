@@ -142,7 +142,7 @@ const CreateListing = () => {
       })
     }
 
-    const imgUrls = await Promise.all(
+    const imageUrls = await Promise.all(
       [...images].map((image) => storeImage(image)))
       .catch(() => {
       setIsLoading(false)
@@ -150,7 +150,7 @@ const CreateListing = () => {
       return
     })
 
-    console.log(imgUrls)
+    console.log(imageUrls)
 
     setIsLoading(false)
   }
