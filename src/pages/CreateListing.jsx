@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { db } from "../firebase.config"
 import { v4 as uuidv4 } from "uuid"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 
 const CreateListing = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -142,17 +143,29 @@ const CreateListing = () => {
       })
     }
 
-    const imageUrls = await Promise.all(
-      [...images].map((image) => storeImage(image)))
-      .catch(() => {
+    const imageUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
       setIsLoading(false)
       toast.error("Failed to upload")
       return
     })
 
-    console.log(imageUrls)
+    const formDataCopy = {
+      ...formData,
+      imageUrls,
+      geolocation,
+      timestamp: serverTimestamp(),
+    }
+
+    formDataCopy.location = address
+    delete formDataCopy.images
+    delete formDataCopy.address
+    !formDataCopy.offer && delete formDataCopy.discountedPrice
+
+    const docRef = await addDoc(collection(db, "listings"), formDataCopy)
 
     setIsLoading(false)
+    toast.success("Listing saved")
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   }
 
   const onMutate = (e) => {
