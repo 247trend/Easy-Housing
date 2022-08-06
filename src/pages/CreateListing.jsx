@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader"
+import { toast } from "react-toastify"
 
 const CreateListing = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -63,19 +64,56 @@ const CreateListing = () => {
     return <Loader />
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    console.log(formData);
+
+    setIsLoading(true)
+
+    if (discountedPrice >= regularPrice) {
+      setIsLoading(false)
+      toast.warning("Discounted price needs to be less than regular price!")
+      return
+    }
+
+    if (images.length > 6) {
+      setIsLoading(false)
+      toast.warning("Max 6 images!")
+      return
+    }
+
+    let geolocation = {}
+    let location
+
+    const geocodingAPI = process.env.REACT_APP_GEOCODING_API_KEY
+    const res = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${geocodingAPI}`
+    )
+
+    const data = await res.json()
+
+    console.log(data)
+
+    geolocation.lat = data.results[0]?.geomertry.location.lat ?? 0
+    geolocation.lng = data.results[0]?.geomertry.location.lat ?? 0
+
+    location = data.stauts === "ZERO_RESULTS" ? undefined : data.results[0]?.formatted_address
+
+    if (location === "undefined" || location.includes("undefined")) {
+      setIsLoading(false)
+      toast.error("Invalid address!")
+    }
+
+    setIsLoading(false)
   }
 
   const onMutate = (e) => {
     let bool = null
 
-    if(e.target.value === "true") {
+    if (e.target.value === "true") {
       bool = true
     }
 
-    if(e.target.value === "false") {
+    if (e.target.value === "false") {
       bool = false
     }
 
@@ -83,7 +121,7 @@ const CreateListing = () => {
     if (e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        images: e.target.files
+        images: e.target.files,
       }))
     }
 
@@ -91,7 +129,7 @@ const CreateListing = () => {
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        [e.target.id]: bool ?? e.target.value
+        [e.target.id]: bool ?? e.target.value,
       }))
     }
   }
