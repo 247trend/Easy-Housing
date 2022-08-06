@@ -467,6 +467,7 @@ button {
 .categoryListingInfoText {
   font-weight: 500;
   font-size: 0.7rem;
+  margin-right: 10px;
 }
 
 .loadMore {

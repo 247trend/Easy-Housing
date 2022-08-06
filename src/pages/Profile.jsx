@@ -1,4 +1,3 @@
-import { async } from "@firebase/util"
 import { getAuth, updateProfile } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
