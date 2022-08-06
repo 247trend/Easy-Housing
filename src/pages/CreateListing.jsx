@@ -3,6 +3,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader"
 import { toast } from "react-toastify"
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
+import { db } from "../firebase.config"
+import { v4 as uuidv4 } from "uuid"
 
 const CreateListing = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -91,16 +94,15 @@ const CreateListing = () => {
 
     const data = await res.json()
 
-    console.log(data)
+    geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
+    geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
 
-    geolocation.lat = data.results[0]?.geomertry.location.lat ?? 0
-    geolocation.lng = data.results[0]?.geomertry.location.lat ?? 0
-
-    location = data.stauts === "ZERO_RESULTS" ? undefined : data.results[0]?.formatted_address
+    location = data.status === "ZERO_RESULTS" ? undefined : data.results[0]?.formatted_address
 
     if (location === "undefined" || location.includes("undefined")) {
       setIsLoading(false)
       toast.error("Invalid address!")
+      return
     }
 
     setIsLoading(false)
