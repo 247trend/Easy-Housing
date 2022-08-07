@@ -4,8 +4,6 @@ import { ReactComponent as EditIcon } from "../assets/svg/editIcon.svg"
 import bedIcon from "../assets/svg/bedIcon.svg"
 import bathtubIcon from "../assets/svg/bathtubIcon.svg"
 import carIcon from "../assets/svg/carIcon.svg"
-import EditListing from "../pages/EditListing"
-
 
 const ListingItem = ({ listing, id, onDelete, onEdit }) => {
   return (
