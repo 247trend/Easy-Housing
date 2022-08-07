@@ -97,6 +97,10 @@ const Profile = () => {
     }
   }
 
+  const onEdit = (listingId) => {
+    navigate(`/edit-listing/${listingId}`)
+  }
+
   return (
     <>
       <div className="profile">
@@ -158,6 +162,9 @@ const Profile = () => {
                     id={listing.id}
                     onDelete={() => {
                       onDelete(listing.id)
+                    }}
+                    onEdit={() => {
+                      onEdit(listing.id)
                     }}
                   />
                 ))}
