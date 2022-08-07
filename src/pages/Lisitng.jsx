@@ -22,7 +22,6 @@ const Listing = () => {
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
-        console.log(docSnap.data())
         setListing(docSnap.data())
         setIsLoading(false)
       }
@@ -86,7 +85,7 @@ const Listing = () => {
 
         {auth.currentUser?.uid !== listing.userRef && (
           <Link
-            to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+            to={`/contact/${listing.userRef}?listingName=${listing.name}&listingLocation=${listing.location}`}
             className="primaryButton"
           >
             Contact Owner
