@@ -7,6 +7,12 @@ import Loader from "../components/Loader"
 import { toast } from "react-toastify"
 import shareIcon from "../assets/svg/shareIcon.svg"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import "swiper/css/scrollbar"
 
 const Listing = () => {
   const [listing, setListing] = useState(null)
@@ -36,6 +42,25 @@ const Listing = () => {
   }
   return (
     <main>
+      <Swiper
+        modules={[Pagination, Scrollbar, A11y]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+      >
+        {listing.imageUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="swiperSlideDiv"
+              style={{
+                background: `url(${listing.imageUrls[index]}) center`,
+                backgroundSize: "cover",
+                minHeight:"20rem"
+              }}
+            ></div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <div
         className="shareIconDiv"
         onClick={() => {
