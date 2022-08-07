@@ -440,12 +440,18 @@ button {
   font-size: 0.7rem;
   opacity: 0.8;
   margin-bottom: 0;
+  margin-right: 10px;
+  margin-top: 0;
 }
 
 .categoryListingName {
   font-weight: 600;
   font-size: 1.25rem;
   margin: 0;
+}
+
+.profileListingOnly {
+  margin-left: -40px;
 }
 
 .categoryListingPrice {
