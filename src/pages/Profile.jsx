@@ -159,7 +159,6 @@ const Profile = () => {
                     onDelete={() => {
                       onDelete(listing.id)
                     }}
-                    
                   />
                 ))}
               </ul>
