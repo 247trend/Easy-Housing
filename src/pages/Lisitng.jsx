@@ -7,7 +7,7 @@ import Loader from "../components/Loader"
 import { toast } from "react-toastify"
 import shareIcon from "../assets/svg/shareIcon.svg"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -43,7 +43,7 @@ const Listing = () => {
   return (
     <main>
       <Swiper
-        modules={[Pagination, Scrollbar, A11y]}
+        modules={[Pagination, Scrollbar, A11y, Autoplay]}
         slidesPerView={1}
         pagination={{ clickable: true, dynamicBullets: true }}
         autoplay={{ delay: 2500 }}
