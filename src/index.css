@@ -453,7 +453,7 @@ button {
   font-weight: 600;
   font-size: 1.1rem;
   color: #89ABE3ff;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
 }
