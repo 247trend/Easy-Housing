@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore"
 import { db } from "../firebase.config"
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -19,7 +19,7 @@ const Slider = () => {
   useEffect(() => {
     const fetchlistings = async () => {
       const listingsRef = collection(db, "listings")
-      const q = query(listingsRef, orderBy("timestamp", "desc"), limit(7))
+      const q = query(listingsRef, orderBy("timestamp", "desc"), limit(10))
       const querySnap = await getDocs(q)
 
       let listings = []
@@ -45,9 +45,11 @@ const Slider = () => {
       <>
         <p className="exploreHeading">Recommend</p>
         <Swiper
-          modules={[Pagination, Scrollbar, A11y]}
+          modules={[Pagination, Scrollbar, A11y, Autoplay]}
           slidesPerView={1}
-          pagination={{ clickable: true }}
+          pagination={{ clickable: true, dynamicBullets: true }}
+          autoplay={{ delay: 2500 }}
+          loop={true}
         >
           {listings.map(({ data, id }) => (
             <SwiperSlide key={id} onClick={() => navigate(`/category/${data.type}/${id}`)}>

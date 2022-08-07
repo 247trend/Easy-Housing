@@ -45,7 +45,9 @@ const Listing = () => {
       <Swiper
         modules={[Pagination, Scrollbar, A11y]}
         slidesPerView={1}
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        autoplay={{ delay: 2500 }}
+        loop={true}
       >
         {listing.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
@@ -54,7 +56,7 @@ const Listing = () => {
               style={{
                 background: `url(${listing.imageUrls[index]}) center`,
                 backgroundSize: "cover",
-                minHeight:"20rem"
+                minHeight: "20rem",
               }}
             ></div>
           </SwiperSlide>
