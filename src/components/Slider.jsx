@@ -40,6 +40,11 @@ const Slider = () => {
     return <Loader />
   }
 
+  //if no listing, <></>
+  if(listings.length === 0 ) {
+    return <></>
+  }
+
   return (
     listings && (
       <>
